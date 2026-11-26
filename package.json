@@ -1,0 +1,16 @@
+{
+  "name": "a11yclass",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Offline accessibility auditor for synthetic teacher course pages.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "test": "node --test",
+    "shots": "node scripts/screenshot.mjs",
+    "browser:check": "node scripts/browser-check.mjs"
+  }
+}

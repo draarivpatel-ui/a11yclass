@@ -1,0 +1,13 @@
+A11yClass is an offline accessibility auditor for a teacher's course page.
+
+The intended learner is a student who uses a screen reader or keyboard only navigation. Their task is simple but essential. Find this week's reading and submit the assignment.
+
+The barrier is invisible to many teachers. A page can look fine while headings, labels, links, contrast, focus order, and tables quietly block that student.
+
+Watch the needs repair sample run. The auditor reads pasted HTML locally and reports checklist coverage, not a compliance certificate.
+
+The first repairs are ranked. Each finding names the exact element, the severity, the learner impact, and a concrete fix.
+
+The checklist table shows all eight checks. Borderline items are honest signals that need a person to confirm them.
+
+Finally, the printable handoff gives a teacher something clear to bring to IT. Everything runs offline with synthetic examples and no student records.

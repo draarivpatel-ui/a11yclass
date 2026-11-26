@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A11yClass - offline course-page accessibility auditor</title>
+  <meta name="description" content="A11yClass audits synthetic or permission-cleared course-page HTML offline and turns accessibility barriers into concrete repairs.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#auditor">Skip to auditor</a>
+
+  <header class="site-header screen-only">
+    <a class="brand" href="./" aria-label="A11yClass home">
+      <svg aria-hidden="true" viewBox="0 0 32 32" width="28" height="28">
+        <rect x="3" y="4" width="26" height="24" rx="6" fill="none" stroke="currentColor" stroke-width="2.4"/>
+        <path d="M9 21 L14 10 L19 21" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M11.2 17 H16.8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        <circle cx="23" cy="22" r="2.2" fill="currentColor"/>
+      </svg>
+      <span>A11yClass</span>
+    </a>
+    <nav class="site-nav" aria-label="Auditor sections">
+      <a href="#results">Checklist</a>
+      <a href="#evidence">Evidence</a>
+      <a href="#handoff">Print handoff</a>
+      <a href="#method">Method</a>
+    </nav>
+    <span class="offline-pill">Offline static app</span>
+  </header>
+
+  <main>
+    <section class="auditor-section screen-only" id="auditor" aria-labelledby="page-title">
+      <div class="title-row">
+        <h1 id="page-title">A11yClass</h1>
+      </div>
+
+      <div class="workbench-grid">
+        <section class="panel input-panel" aria-labelledby="input-title">
+          <div class="panel-heading">
+            <h2 id="input-title">Course page HTML</h2>
+            <span class="panel-meta" id="character-count">0 characters</span>
+          </div>
+
+          <div class="sample-picker" aria-label="Synthetic samples">
+            <button type="button" class="sample-button" data-sample="problem" aria-pressed="true">Needs repair</button>
+            <button type="button" class="sample-button" data-sample="borderline" aria-pressed="false">Borderline</button>
+            <button type="button" class="sample-button" data-sample="repaired" aria-pressed="false">Repaired</button>
+          </div>
+
+          <label class="source-label" for="source-input">Paste synthetic or permission-cleared HTML</label>
+          <textarea id="source-input" spellcheck="false" autocomplete="off" autocapitalize="off" wrap="soft"></textarea>
+
+          <div class="input-actions">
+            <button type="button" class="primary-button" id="run-audit">Run audit</button>
+            <button type="button" class="secondary-button" id="clear-input">Clear</button>
+          </div>
+
+          <noscript>
+            <p class="noscript-note">A11yClass needs JavaScript enabled because the audit runs locally in this browser. No network service is used.</p>
+          </noscript>
+        </section>
+
+        <section class="panel overview-panel" aria-labelledby="overview-title" aria-live="polite">
+          <div class="panel-heading">
+            <h2 id="overview-title">Audit overview</h2>
+            <span class="panel-meta" id="audit-state">Ready</span>
+          </div>
+          <div class="score-layout" id="score-layout">
+            <div class="score-block">
+              <span class="score-value" id="coverage-value">--%</span>
+              <span class="score-label">checklist coverage</span>
+            </div>
+            <div class="score-detail">
+              <div class="coverage-track" aria-hidden="true"><span id="coverage-bar"></span></div>
+              <p id="coverage-explanation">Run an audit to measure pass, borderline and failed checks.</p>
+            </div>
+          </div>
+          <div class="status-strip" id="status-strip" aria-label="Check totals"></div>
+          <div class="top-fix-box">
+            <h3>Fix these three first</h3>
+            <ol class="top-fix-list" id="top-fix-list"></ol>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="results-section screen-only" id="results" aria-labelledby="results-title">
+      <div class="section-heading">
+        <h2 id="results-title" tabindex="-1">Per-check table</h2>
+        <p id="results-note">The table appears after the first audit.</p>
+      </div>
+      <div class="table-wrap panel">
+        <table id="check-table">
+          <caption>Accessibility checklist results for the pasted source</caption>
+          <thead>
+            <tr>
+              <th scope="col">Check</th>
+              <th scope="col">Result</th>
+              <th scope="col">Findings</th>
+              <th scope="col">Elements</th>
+              <th scope="col">First concrete fix</th>
+            </tr>
+          </thead>
+          <tbody id="check-table-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="evidence-section screen-only" id="evidence" aria-labelledby="evidence-title">
+      <div class="section-heading">
+        <h2 id="evidence-title">Element evidence</h2>
+        <p>Every finding names the exact source element, why it blocks the learner and the repair to try first.</p>
+      </div>
+      <div class="evidence-list" id="evidence-list"></div>
+    </section>
+
+    <section class="handoff-section" id="handoff" aria-labelledby="handoff-title">
+      <div class="section-heading screen-only">
+        <h2 id="handoff-title">Printable IT handoff</h2>
+        <p>A plain summary a teacher can print, copy or download after checking that the pasted source may be shared.</p>
+      </div>
+      <div class="handoff-actions screen-only">
+        <button type="button" class="primary-button" id="print-report">Print summary</button>
+        <button type="button" class="secondary-button" id="copy-report">Copy Markdown</button>
+        <button type="button" class="secondary-button" id="download-report">Download Markdown</button>
+        <span class="copy-status" id="copy-status" role="status"></span>
+      </div>
+      <article class="print-summary" id="print-summary" aria-label="Printable audit summary"></article>
+    </section>
+
+    <section class="method-section screen-only" id="method" aria-labelledby="method-title">
+      <div class="section-heading">
+        <h2 id="method-title">Method and honest limits</h2>
+      </div>
+      <div class="method-grid">
+        <dl class="method-list">
+          <div>
+            <dt>Intended learner</dt>
+            <dd>A student using a screen reader or keyboard-only navigation in a course page.</dd>
+          </div>
+          <div>
+            <dt>Task</dt>
+            <dd>Find the week's reading and submit an assignment without needing a pointer or visual-only cues.</dd>
+          </div>
+          <div>
+            <dt>Barrier removed</dt>
+            <dd>The teacher usually never learns that the page is unusable until a student gives up. The audit makes concrete barriers visible before publication.</dd>
+          </div>
+        </dl>
+        <div class="limits-panel panel">
+          <h3>What the score means</h3>
+          <p>Coverage is counted as passed checks plus half credit for borderline checks, divided by the eight checks in this prototype. It is a triage number, never WCAG certification.</p>
+          <h3>Static-audit limits</h3>
+          <ul>
+            <li>No JavaScript execution, external CSS loading, rendering measurement or network fetch.</li>
+            <li>Contrast uses inline styles and unprefixed Tailwind-ish color hints. Unknown declarations fall back to black text on white.</li>
+            <li>Accessible names, table structure and custom keyboard behavior are approximations that need real browser and assistive-technology testing.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer screen-only">
+    <p>A11yClass runs entirely in the browser. Synthetic examples only. No student records, grades, accounts or network calls.</p>
+  </footer>
+</body>
+</html>
