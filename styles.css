@@ -59,7 +59,7 @@ a {
 }
 
 a:hover {
-  color: var(--teal-strong);
+  text-decoration-thickness: 2px;
 }
 
 button,
